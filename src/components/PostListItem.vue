@@ -1,8 +1,16 @@
 <template>
   <div class="post">
-    <a href class="logo">
-      <img :src="topic.author.avatar_url" alt="logo" />
-    </a>
+    <router-link
+      :to="{
+        name: 'User',
+        params: {
+          name: topic.author.loginname
+        }
+      }"
+      class="avatar"
+    >
+      <img :src="topic.author.avatar_url" alt="avatar" />
+    </router-link>
 
     <span class="reply-count">
       <span class="reply">{{ topic.reply_count }}</span>
@@ -11,11 +19,7 @@
     </span>
 
     <span class="title-wrapper">
-      <span class="tab" :class="{ good: topic.good || topic.top }">
-        {{
-        topic | formatTab
-        }}
-      </span>
+      <span class="tab" :class="{ good: topic.good || topic.top }">{{ topic | formatTab }}</span>
       <router-link
         :to="{
           name: 'Topic',
@@ -58,7 +62,7 @@ export default class PostListItem extends Vue {
   align-items: center;
   justify-content: space-between;
 
-  .logo {
+  .avatar {
     width: 30px;
     height: 30px;
     img {
