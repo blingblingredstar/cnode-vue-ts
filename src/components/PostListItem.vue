@@ -11,12 +11,17 @@
     </span>
 
     <span class="title-wrapper">
-      <span class="tab" :class="{ good: topic.good || topic.top }">{{ topic | formatTab }}</span>
+      <span class="tab" :class="{ good: topic.good || topic.top }">
+        {{
+        topic | formatTab
+        }}
+      </span>
       <router-link
         :to="{
           name: 'Topic',
           params: {
-            id: topic.id
+            id: topic.id,
+            name: topic.author.loginname
           }
         }"
         class="title"
@@ -54,9 +59,9 @@ export default class PostListItem extends Vue {
   justify-content: space-between;
 
   .logo {
+    width: 30px;
+    height: 30px;
     img {
-      width: 30px;
-      height: 30px;
       border-radius: 3px;
     }
   }

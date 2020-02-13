@@ -2,11 +2,7 @@
   <div class="topic-content">
     <header>
       <span class="title-wrapper">
-        <span class="tab" :class="{ good: topic.good || topic.top }">
-          {{
-          topic.tab | formatTab
-          }}
-        </span>
+        <span class="tab" :class="{ good: topic.good || topic.top }">{{ topic.tab | formatTab }}</span>
         <span class="title">{{ topic.title }}</span>
       </span>
       <span class="changes">
@@ -17,28 +13,7 @@
       </span>
     </header>
     <main class="content" v-html="topic.content"></main>
-    <div class="replies" v-if="topic.replies">
-      <header>{{ topic.replies.length }} 回复</header>
-      <main>
-        <ul>
-          <li v-for="(reply, index) in topic.replies" :key="reply.id">
-            <a class="avatar" href>
-              <img :src="reply.author.avatar_url" alt="avatar" />
-            </a>
-
-            <span class="reply-content">
-              <span>
-                <a class="username">{{ reply.author.loginname }}</a>
-                <a class="reply-time" href>{{ index + 1 }}楼 · {{ reply.create_at | formatDate }}</a>
-              </span>
-              <span v-html="reply.content"></span>
-            </span>
-
-            <span class="ups">👍{{ reply.ups.length }}</span>
-          </li>
-        </ul>
-      </main>
-    </div>
+    <ReplyList v-if="topic.replies" :replies="topic.replies" />
   </div>
 </template>
 
@@ -48,8 +23,9 @@ import { Component, Prop } from "vue-property-decorator";
 import { Topic } from "../custom";
 import { formatTab } from "@/lib/formatTab";
 import { formatDate } from "@/lib/formatDate";
+import ReplyList from "@/components/ReplyList.vue";
 
-@Component({ filters: { formatTab, formatDate } })
+@Component({ filters: { formatTab, formatDate }, components: { ReplyList } })
 export default class TopicContent extends Vue {
   @Prop() readonly topic!: Topic;
 
@@ -59,10 +35,6 @@ export default class TopicContent extends Vue {
     if (this.topic.tab === "good") return "精华";
     if (this.topic.tab === "job") return "招聘";
     return "其他";
-  }
-
-  created() {
-    console.log(this.topic);
   }
 }
 </script>
@@ -83,8 +55,11 @@ export default class TopicContent extends Vue {
     display: block;
     height: auto;
     max-width: 100%;
-    vertical-align: middle;
     border: 0;
+  }
+
+  pre {
+    max-width: 100%;
   }
 }
 </style>
@@ -92,10 +67,13 @@ export default class TopicContent extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/markdown-github.css";
 .topic-content {
+  width: 700px;
+
   header {
     padding: 10px;
     background-color: #f6f6f6;
     border-radius: 3px 3px 0 0;
+
     display: flex;
     flex-direction: column;
 
@@ -143,57 +121,6 @@ export default class TopicContent extends Vue {
   &.good {
     background: #80bd01;
     color: #fff;
-  }
-}
-
-.replies {
-  margin-top: 20px;
-  header {
-    font-size: 14px;
-    padding: 10px;
-    background-color: #f6f6f6;
-    border-radius: 3px 3px 0 0;
-    color: #444;
-  }
-  li {
-    padding: 10px;
-    background: #fff;
-    border-top: 1px solid #f0f0f0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    .avatar {
-      margin-top: 8px;
-      margin-right: 10px;
-      width: 30px;
-      height: 30px;
-      img {
-        border-radius: 3px;
-      }
-    }
-
-    .reply-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-
-      .username {
-        font-size: 12px;
-        font-weight: 700;
-        margin-right: 0.5em;
-      }
-      .reply-time {
-        color: #08c;
-        text-decoration: none;
-        font-size: 11px;
-      }
-    }
-
-    .ups {
-      color: grey;
-      font-size: 15px;
-    }
   }
 }
 </style>

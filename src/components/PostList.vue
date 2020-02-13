@@ -2,6 +2,7 @@
   <main class="posts">
     <PostListHeader @update:tab="updateTab" />
     <PostListItem v-for="topic in topics" :key="topic.id" :topic="topic" />
+    <Pagination @update:page="updatePage" />
   </main>
 </template>
 
@@ -13,11 +14,13 @@ import { Topic, Tab } from "@/custom";
 import { TopicsActions } from "../store/topics";
 import PostListHeader from "@/components/PostListHeader.vue";
 import PostListItem from "@/components/PostListItem.vue";
+import Pagination from "@/components/Pagination.vue";
 
 @Component({
   components: {
     PostListHeader,
-    PostListItem
+    PostListItem,
+    Pagination
   }
 })
 export default class PostList extends Vue {
@@ -33,6 +36,11 @@ export default class PostList extends Vue {
   updateTab(tab: Tab) {
     this.currentTab = tab;
     this.currentPage = 1;
+    this.fetchTopics({ page: this.currentPage, tab: this.currentTab });
+  }
+
+  updatePage(page: number) {
+    this.currentPage = page;
     this.fetchTopics({ page: this.currentPage, tab: this.currentTab });
   }
 

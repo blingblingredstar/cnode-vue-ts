@@ -43,3 +43,17 @@ export type Tab = "all" | "ask" | "share" | "job" | "good";
 export interface TopicState {
   topic: Topic;
 }
+
+export interface User {
+  avatar_url: string;
+  create_at: string;
+  githubUsername: string;
+  loginname: string;
+  recent_replies: Reply[];
+  recent_topics: Topic[];
+  score: number;
+}
+
+export interface UserState {
+  user: User;
+}

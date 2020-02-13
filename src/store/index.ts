@@ -1,3 +1,4 @@
+import { user } from "./user";
 import { topics } from "./topics";
 import { topic } from "./topic";
 import Vue from "vue";
@@ -8,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     topics,
-    topic
+    topic,
+    user
   }
 });
