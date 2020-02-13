@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ef8bf7ad65aaf179b850",
-    "url": "/cnode-vue-ts/dist/css/app.9ab6721d.css"
+    "revision": "3f8a479471c3531ab27e",
+    "url": "/cnode-vue-ts/dist/css/app.6cceeb33.css"
   },
   {
     "revision": "86f6a7c2f6cf9844d8a9f5d088d87406",
     "url": "/cnode-vue-ts/dist/img/cnodejs_light.86f6a7c2.svg"
   },
   {
-    "revision": "e1d22198990315561ea1822d78268373",
+    "revision": "99cc18b20f3f36408c8e958188fb7c67",
     "url": "/cnode-vue-ts/dist/index.html"
   },
   {
-    "revision": "ef8bf7ad65aaf179b850",
-    "url": "/cnode-vue-ts/dist/js/app.76cb72f0.js"
+    "revision": "3f8a479471c3531ab27e",
+    "url": "/cnode-vue-ts/dist/js/app.591813f9.js"
   },
   {
     "revision": "c70e038b60fb4190043b",
